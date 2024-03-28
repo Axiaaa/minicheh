@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 13:03:07 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/28 17:00:58 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 t_env	*ft_envlstnew(char *key, char *value);
 t_env	*ft_envlstnew(char *key, char *value);
 t_env	*ft_envlstnew_frees(char **key_value);
+size_t	path_len(char *str);
 char	*get_value(char *str, t_env *env);
 char	*get_a_new_line(t_env *env);
 char	*get_pwd(void);
@@ -77,5 +78,6 @@ int		get_heredoc(char *line, t_env *env, char *name);
 int		redirect_before_bi(char *line, int fd[2]);
 int		do_export(char *temp, t_env **env);
 int		free_ret_1(char *str);
+int		open_dup2(char *line, size_t len, int flag);
 
 #endif 

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:13:05 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/28 13:28:20 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/28 16:53:11 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	remove_dobble_spaces(char *line)
 		}
 		i++;
 	}
-
 }
 
 static void	replace_tabs_with_space(char *line)
