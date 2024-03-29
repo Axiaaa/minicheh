@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:59:18 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/29 08:45:39 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/29 08:49:48 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 size_t	path_len(char *line)
 {
-	size_t  i;
-	short   delimiter;
+	size_t	i;
+	short	delimiter;
 
 	i = 0;
 	delimiter = 0;
@@ -27,7 +27,7 @@ size_t	path_len(char *line)
 		else if ((line[i] == '\"' || line[i] == '\'') && !delimiter)
 			delimiter = 1 + (line[i] == '\'');
 		else if (!ft_isalnum(line[i]) && line[i] != '_' && line[i] != '/'
-			&& line[i] != '-' && line[i] != '.' && line[i] != '\'' 
+			&& line[i] != '-' && line[i] != '.' && line[i] != '\''
 			&& line[i] != '\"' && !delimiter)
 			return (i);
 		i++;

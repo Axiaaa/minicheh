@@ -6,20 +6,18 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/29 08:46:32 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/29 08:55:49 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-static size_t	where_command(char *line)
+static size_t	where_command(char *line, size_t i)
 {
-	size_t	i;
 	short	is_file;
 	short	delimiter;
 
-	i = 0;
 	is_file = 0;
 	delimiter = 0;
 	while (line[i] && (is_file || line[i] == ' '
@@ -33,8 +31,8 @@ static size_t	where_command(char *line)
 		else if ((line[i] == '<' || line[i] == '>') && !delimiter)
 			is_file = 1;
 		else if (is_file == 1 && (!ft_isalnum(line[i]) && line[i] != '_'
-                        && line[i] != '/' && line[i] != '-' && line[i] != '.'
-                        && line[i] != '\'' && line[i] != '\"' && line[i] != -1))
+				&& line[i] != '/' && line[i] != '-' && line[i] != '.'
+				&& line[i] != '\'' && line[i] != '\"' && line[i] != -1))
 			is_file = 2;
 		else if (is_file == 2 && line[i] == ' ')
 			is_file = 0;
@@ -46,7 +44,7 @@ static size_t	where_command(char *line)
 static void	change_string(char *str, char c1, char c2)
 {
 	size_t	i;
-	int		delimiter;
+	short	delimiter;
 
 	i = 0;
 	delimiter = 0;
@@ -70,7 +68,7 @@ int	is_a_built_in(char *line, t_env **env)
 {
 	size_t	i;
 
-	i = where_command(line);
+	i = where_command(line, 0);
 	if (!ft_strncmp(line + i, "env", 3) && (line[i + 3] == ' ' || !line[i + 3]))
 		return (bi_env(line, env) || 1);
 	if (!ft_strncmp(line + i, "echo", 4)
