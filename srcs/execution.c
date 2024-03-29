@@ -6,12 +6,42 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 14:17:51 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/29 08:46:32 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
+
+static size_t	where_command(char *line)
+{
+	size_t	i;
+	short	is_file;
+	short	delimiter;
+
+	i = 0;
+	is_file = 0;
+	delimiter = 0;
+	while (line[i] && (is_file || line[i] == ' '
+			|| delimiter || line[i] == '<' || line[i] == '>'))
+	{
+		if ((delimiter == 1 && line[i] == '\"')
+			|| (delimiter == 2 && line[i] == '\''))
+			delimiter = 0;
+		else if ((line[i] == '\"' || line[i] == '\'') && !delimiter)
+			delimiter = 1 + (line[i] == '\'');
+		else if ((line[i] == '<' || line[i] == '>') && !delimiter)
+			is_file = 1;
+		else if (is_file == 1 && (!ft_isalnum(line[i]) && line[i] != '_'
+                        && line[i] != '/' && line[i] != '-' && line[i] != '.'
+                        && line[i] != '\'' && line[i] != '\"' && line[i] != -1))
+			is_file = 2;
+		else if (is_file == 2 && line[i] == ' ')
+			is_file = 0;
+		i++;
+	}
+	return (i);
+}
 
 static void	change_string(char *str, char c1, char c2)
 {
@@ -40,9 +70,7 @@ int	is_a_built_in(char *line, t_env **env)
 {
 	size_t	i;
 
-	i = 0;
-	while (*(line + i) == ' ')
-		i++;
+	i = where_command(line);
 	if (!ft_strncmp(line + i, "env", 3) && (line[i + 3] == ' ' || !line[i + 3]))
 		return (bi_env(line, env) || 1);
 	if (!ft_strncmp(line + i, "echo", 4)
@@ -57,7 +85,8 @@ int	is_a_built_in(char *line, t_env **env)
 	if (!ft_strncmp(line + i, "export", 6)
 		&& (line[i + 6] == ' ' || !line[i + 6]))
 		return (bi_export(line, env) || 1);
-	if (!ft_strncmp(line, "exit", 4) && (line[4] == ' ' || !line[4]))
+	if (!ft_strncmp(line + i, "exit", 4)
+		&& (line[4 + i] == ' ' || !line[4 + i]))
 		return (bi_exit(line) || 1);
 	return (0);
 }

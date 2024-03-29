@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 03:11:22 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 14:57:11 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/29 08:29:59 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,17 @@ int	bi_exit(char *line)
 	int		args_flag;
 	int		fd[2];
 
+	line_cpy = line;
 	if (!redirect_before_bi(line, fd))
 		return (the_return_value(1));
 	restaure_redirections_bi(fd);
-	line_cpy = line;
 	while (*line == ' ')
 		line++;
 	line += 4;
 	while (*line == ' ')
 		line++;
 	if (!(*line))
-		return (-1);
+		return (-(ft_strlcpy(line_cpy, "exit", 5) || 1));
 	args_flag = check_args_exit(line);
 	res = 1;
 	if (args_flag == 1)

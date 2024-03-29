@@ -6,26 +6,31 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:59:18 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/28 17:03:15 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/29 08:45:39 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	path_len(char *str)
+size_t	path_len(char *line)
 {
-	size_t	i;
+	size_t  i;
+	short   delimiter;
 
 	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	delimiter = 0;
+	while (line[i])
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '_' && \
-			str[i] != '/' && str[i] != '-' && str[i] != '.'
-			&& str[i] != '\'' && str[i] != '\"' && str[i] != -1)
+		if ((delimiter == 1 && line[i] == '\"')
+			|| (delimiter == 2 && line[i] == '\''))
+			delimiter = 0;
+		else if ((line[i] == '\"' || line[i] == '\'') && !delimiter)
+			delimiter = 1 + (line[i] == '\'');
+		else if (!ft_isalnum(line[i]) && line[i] != '_' && line[i] != '/'
+			&& line[i] != '-' && line[i] != '.' && line[i] != '\'' 
+			&& line[i] != '\"' && !delimiter)
 			return (i);
-		++i;
+		i++;
 	}
 	return (i);
 }
