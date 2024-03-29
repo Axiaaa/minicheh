@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:58:32 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/28 17:00:08 by geymat           ###   ########.fr       */
+/*   Updated: 2024/03/29 09:02:56 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	directions_hub(char *line, size_t *i, int delimiter)
 			return (res);
 		(*i)--;
 	}
-	if (line[*i] == '>' && !delimiter)
+	else if (line[*i] == '>' && !delimiter)
 	{
 		res = line_shortener(line + *i, 2 + (line[*i + 1] == '>'));
 		if (res < 0)
