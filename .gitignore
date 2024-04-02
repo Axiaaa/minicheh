@@ -1,6 +1,7 @@
 *.o
 *.a
 *.out
+*.d
 .vscode
 .here_doc
 minishell
