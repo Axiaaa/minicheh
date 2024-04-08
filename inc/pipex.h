@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:40:12 by geymat            #+#    #+#             */
-/*   Updated: 2024/04/02 12:24:36 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:56:13 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 # include <stdio.h>
 # include <string.h>
+# include <signal.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <sys/wait.h>

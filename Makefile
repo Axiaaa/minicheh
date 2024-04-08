@@ -56,8 +56,6 @@ $(OBJS_DIR):
 $(OBJS_DIR)/%.o: srcs/%.c $(DEPS) | $(OBJS_DIR)
 	$(CC) $(FLAGS) $(HEADER) -c $< -o $@
 
-
-
 $(LIBFT):
 	cd ./libft && $(MAKE) all
 
