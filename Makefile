@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3 -MMD -MP
+FLAGS = -Wall -Wextra -Werror -g3
 HEADER = -I inc -I libft
 DEPS = inc/minishell.h \
        inc/struct.h \
@@ -47,17 +47,18 @@ all: $(NAME) end
 
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(HEADER) -Llibft -lft -lreadline
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME) -Llibft -lft -lreadline
 
-$(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)/kind_of_pipex
-	mkdir -p $(OBJS_DIR)/build_in
 
-$(OBJS_DIR)/%.o: srcs/%.c $(DEPS) | $(OBJS_DIR)
-	$(CC) $(FLAGS) $(HEADER) -c $< -o $@
+-include $(OBJS:.o=.d)
+$(OBJS_DIR)/%.o: srcs/%.c 
+	@mkdir -p $(@D)
+	$(CC) $(FLAGS) -MMD -MP $(HEADER) -c $< -o $@
 
-$(LIBFT):
-	cd ./libft && $(MAKE) all
+$(LIBFT): FORCE
+	make -C ./libft
+
+FORCE:
 
 
 end : 
