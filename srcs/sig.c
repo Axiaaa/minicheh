@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 01:55:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 02:56:10 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/14 17:28:41 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void	sahandler_true(int sig)
 
 void	sahandler_fake(int sig)
 {
-	if (sig == SIGINT)
-		write(1, "\n", 1);
-	if (sig == SIGQUIT)
-		write(1, "Quit (core dumped)\n", 19);
+	(void) sig;
 }
 
 void	sahandler_s_heredoc(int sig)

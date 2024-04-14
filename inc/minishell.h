@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/28 17:00:58 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/14 17:47:55 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 # include "struct.h"
 # include "collector.h"
 
-# define RST    "\033[0m"      /* Reset to default color */
-# define RED	"\033[1;31m"   /* Bold Red */
-# define G      "\033[1;32m"   /* Bold Green */
-# define Y      "\033[1;33m"   /* Bold Yellow */
-# define B      "\033[1;34m"   /* Bold Blue */
-# define M      "\033[1;35m"   /* Bold Magenta */
-# define C      "\033[1;36m"   /* Bold Cyan */
-# define W      "\033[1;37m"   /* Bold White */
+# define RST    "\001\x1B[0m\002"      /* Reset to default color */
+# define RED	"\001\x1B[1;31m\002"   /* Bold Red */
+# define G      "\001\x1B[1;32m\002"   /* Bold Green */
+# define Y      "\001\x1B[1;33m\002"   /* Bold Yellow */
+# define B      "\001\x1B[1;34m\002"   /* Bold Blue */
+# define M      "\001\x1B[1;35m\002"   /* Bold Magenta */
+# define C      "\001\x1B[1;36m\002"   /* Bold Cyan */
+# define W      "\001\x1B[1;37m\002"   /* Bold White */
 
 t_env	*ft_envlstnew(char *key, char *value);
 t_env	*ft_envlstnew(char *key, char *value);

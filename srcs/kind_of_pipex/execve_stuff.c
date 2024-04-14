@@ -6,68 +6,26 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:54:44 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/28 13:38:28 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/14 16:53:04 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	*shorten_command(char *command)
-{
-	size_t	i;
-
-	i = 0;
-	command = ft_strdup(command);
-	if (!command)
-		return (NULL);
-	while (*command == ' ')
-		command++;
-	while (command[i] && command[i] != ' ')
-		i++;
-	command[i] = 0;
-	replace_chars_in_str(command, -1, ' ');
-	rm_useless_quotes(command);
-	return (command);
-}
-
-char	*find_command(char **paths, char *command, int i)
-{
-	char	*path;
-	size_t	len;
-
-	command = shorten_command(command);
-	if (!paths || !command)
-		return (NULL);
-	path = ft_strjoinwithslash(paths[i++], command);
-	if (path)
-		len = ft_strlen(path);
-	while (path && (ft_strchr(command, '/') > command + len || !ft_strchr
-			(command, '/')) && access(path, X_OK) && paths[i])
-		path = ft_strjoinwithslash(paths[i++], command);
-	if (paths && path && (access(path, X_OK) || !*command))
-	{
-		if (ft_strchr(command, '/') > command + len || ft_strchr(command, '/'))
-			print_error("minishell", strerror(errno), command);
-		else
-			print_error("minishell", "command not found", command);
-		path = NULL;
-	}
-	return (path);
-}
-
 int	middle_command(char *line, char **envp, int fd[3])
 {
-	const char	*remember_line = line;
-	char		*command;
-	char		**args;
+	char	*remember_line;
+	char	*command;
+	char	**args;
 
+	remember_line = line;
 	if (ft_getenv(envp, "PATH"))
-		command = find_command(ft_split(ft_getenv(envp, "PATH") + 5, ':'),
-				line, 0);
+		command = get_path(ft_split(ft_getenv(envp, "PATH") + 5, ':'),
+				line);
 	else
-		command = find_command(ft_split(".", ':'), line, 0);
+		command = get_path(ft_split(".", ':'), line);
 	if (!command)
-		return (close_3_free(fd[0], fd[1], -1, (char *) remember_line));
+		return (close_3_free(fd[0], fd[1], -1, remember_line));
 	args = ft_split(line, ' ');
 	replace_chars_in_argv(args, -1, ' ');
 	rm_useless_quotes_argv(args);

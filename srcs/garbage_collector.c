@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 01:30:03 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/21 04:39:35 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/14 18:44:29 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,23 @@ static void	full_destruction(t_alloc *first)
 
 static void	one_single_free(void *alloc, t_alloc *actual)
 {
+	t_alloc	*old;
+
+	old = NULL;
 	while (actual && actual->alloc != alloc)
+	{
+		old = actual;
 		actual = actual->next;
+	}
 	if (actual)
 	{
 		free(actual->alloc);
 		actual->alloc = NULL;
+		if (old)
+		{
+			old->next = actual->next;
+			free(actual);
+		}
 	}
 	else
 		free(alloc);

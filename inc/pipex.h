@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 23:40:12 by geymat            #+#    #+#             */
-/*   Updated: 2024/04/08 13:56:13 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/04/14 17:50:28 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	*ft_strdup_until_space(const char *src);
 char	*ft_strdup(const char *src);
 char	*ft_getenv(char **envp, char *key);
 char	*ft_strjoinwithslash(char const *s1, char const *s2);
+char	*get_path(char **paths, char *line);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *s1);
 int		close_3_free(int fd1, int fd2, int fd3, void *allocation);
