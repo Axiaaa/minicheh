@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:23:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/24 21:31:59 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/14 20:43:00 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ static int	the_parent(char *name)
 	struct stat	buff;
 
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	wait(&kid);
 	signal(SIGINT, &sahandler_fake);
+	signal(SIGQUIT, &sahandler_fake);
 	if (WIFEXITED(kid) && WEXITSTATUS(kid) != 130
 		&& WEXITSTATUS(kid) != -1)
 		return (0);
