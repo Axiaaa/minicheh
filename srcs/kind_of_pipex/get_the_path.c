@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 15:36:38 by geymat            #+#    #+#             */
-/*   Updated: 2024/04/14 18:01:40 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/15 17:04:49 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,10 @@ static char	*shorten_command(char *command)
 static char	*find_command(char **paths, char *command)
 {
 	char	*path;
-	size_t	len;
 	ssize_t	i;
 
 	i = 0;
 	path = ft_strjoinwithslash(paths[i++], command);
-	if (path)
-		len = ft_strlen(path);
 	while (path && access(path, X_OK) && paths[i])
 	{
 		f_free(path);
