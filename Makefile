@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g3
 HEADER = -I inc -I libft
 DEPS = inc/minishell.h \
        inc/struct.h \

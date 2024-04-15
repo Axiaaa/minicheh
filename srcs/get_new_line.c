@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:13:05 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/28 16:53:11 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/15 18:14:50 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	quotes(char *str)
 
 	delimiter = 0;
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 	{
 		if (delimiter == 1 && str[i] == '\"')
@@ -86,6 +88,17 @@ static void	replace_tabs_with_space(char *line)
 	remove_dobble_spaces(line);
 }
 
+static char	*trim_line(char *str, t_env *env)
+{
+	str = ft_strjoin_free_first(str, "");
+	if (!str || !*str)
+		return (NULL);
+	add_history(str);
+	replace_tabs_with_space(str);
+	replace_all_here_docs(&str, env);
+	return (replace_env(str, env));
+}
+
 char	*get_a_new_line(t_env *env)
 {
 	char	*str;
@@ -108,9 +121,5 @@ char	*get_a_new_line(t_env *env)
 		str = ft_strjoin_free_first(str, temp);
 		f_free(temp);
 	}
-	str = ft_strjoin_free_first(str, "");
-	if (str && *str)
-		add_history(str);
-	replace_tabs_with_space(str);
-	return (replace_env(str, env));
+	return (trim_line(str, env));
 }

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 07:22:00 by geymat            #+#    #+#             */
-/*   Updated: 2024/04/14 20:02:02 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/15 18:00:53 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	executions(char **line, t_env **env)
 		the_return_value(1);
 		return ;
 	}
-	replace_all_here_docs(line, *env);
 	argv = split_and_parsing(*line);
 	if (!argv)
 	{

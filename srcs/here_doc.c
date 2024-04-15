@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 04:23:47 by geymat            #+#    #+#             */
-/*   Updated: 2024/04/14 20:43:00 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/15 18:05:56 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ static void	open_heredocs(char *command, int fd, t_env *env)
 	if (!limiter)
 		return ;
 	line = readline(">");
-	if (line && !limiter[ft_strlen(limiter) + 1])
-		line = replace_env(line, env);
-	if (line)
-		len = ft_strlen(line);
 	while (line && ft_strcmp(line, limiter))
 	{
-		write(fd, line, len);
-		write(fd, "\n", 1);
-		f_free(line);
-		line = readline(">");
 		if (line && !limiter[ft_strlen(limiter) + 1])
 			line = replace_env(line, env);
 		if (line)
 			len = ft_strlen(line);
+		write(fd, line, len);
+		write(fd, "\n", 1);
+		f_free(line);
+		line = readline(">");
 	}
+	if (line && !limiter[ft_strlen(limiter) + 1])
+		line = replace_env(line, env);
+	if (line)
+		len = ft_strlen(line);
 	clean_the_mess(line, limiter);
 }
 
