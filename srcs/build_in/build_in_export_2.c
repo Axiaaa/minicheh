@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   build_in_export_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lcamerly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:43:06 by lcamerly          #+#    #+#             */
-/*   Updated: 2024/03/27 14:41:00 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/15 23:39:42 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	startwithnbr(char *s)
+{
+	if (s[0] >= '0' && s[0] <= '9')
+		return (1);
+	return (0);
+}
 
 int	do_export(char *temp, t_env **env)
 {

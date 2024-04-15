@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 06:04:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/04/14 17:47:55 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/15 23:40:03 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ int		redirect_before_bi(char *line, int fd[2]);
 int		do_export(char *temp, t_env **env);
 int		free_ret_1(char *str);
 int		open_dup2(char *line, size_t len, int flag);
+int		startwithnbr(char *s);
 
 #endif 

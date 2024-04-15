@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:21:40 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/27 14:41:17 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/15 23:37:27 by lcamerly         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	export_multiple(char *line, t_env **env)
 	while (*line)
 	{
 		temp = ft_space_strtok(line);
-		if (temp && any_forbidden_chars_export(temp))
+		if (temp && (any_forbidden_chars_export(temp) || startwithnbr(temp)))
 			trigger = 1;
 		else
 			do_export(temp, env);
