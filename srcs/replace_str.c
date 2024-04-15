@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:14:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/04/15 17:22:39 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/15 17:56:11 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ char	*get_value(char *str, t_env *env)
 		return (NULL);
 	while (env && env->key)
 	{
-		if (!ft_strncmp(str, env->key, word_len(str)))
+		if (!ft_strncmp(str, env->key, word_len(str))
+			&& word_len(str) == ft_strlen(env->key))
 		{
 			if (!env->value)
 				return ("");
@@ -93,7 +94,7 @@ char	*replace_env(char *str, t_env *env)
 		else if ((str[i] == '\'') && !delimiter)
 			delimiter = 2;
 		if (str[i] == '$' && (ft_isalnum(str[i + 1]) || str[i + 1] == '_'
-			|| str[i + 1] == '?') && delimiter != 2)
+				|| str[i + 1] == '?') && delimiter != 2)
 		{
 			replace_inside(&str, i, i + word_len(str + i + 1) + 1,
 				get_value(str + i + 1, env));
