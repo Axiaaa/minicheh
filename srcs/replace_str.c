@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:14:33 by geymat            #+#    #+#             */
-/*   Updated: 2024/04/15 18:28:11 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/15 23:46:46 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*replace_env(char *str, t_env *env)
 			delimiter = 1;
 		else if ((str[i] == '\'') && !delimiter)
 			delimiter = 2;
-		if (str[i] == '$' && (ft_isalnum(str[i + 1]) || str[i + 1] == '_'
+		if (str[i] == '$' && (ft_isalpha(str[i + 1]) || str[i + 1] == '_'
 				|| str[i + 1] == '?' || str[i + 1] == '\''
 				|| str[i + 1] == '\"') && delimiter != 2)
 		{
