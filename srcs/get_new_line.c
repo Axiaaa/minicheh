@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 05:13:05 by geymat            #+#    #+#             */
-/*   Updated: 2024/04/16 14:47:49 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/16 15:07:39 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,10 @@ static void	replace_tabs_with_space(char *line)
 static char	*trim_line(char *str, t_env *env)
 {
 	str = ft_strjoin_free_first(str, "");
-	if (!str || !*str)
+	if (!str)
 		return (NULL);
-	add_history(str);
+	if (*str)
+		add_history(str);
 	replace_tabs_with_space(str);
 	if (replace_all_here_docs(&str, env))
 	{
