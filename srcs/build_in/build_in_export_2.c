@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:43:06 by lcamerly          #+#    #+#             */
-/*   Updated: 2024/04/15 23:39:42 by lcamerly         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:29:10 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	startwithnbr(char *s)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] == '"' || s[i] == 39)

@@ -6,7 +6,7 @@
 /*   By: lcamerly <lcamerly@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 23:08:43 by geymat            #+#    #+#             */
-/*   Updated: 2024/04/14 17:43:23 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/16 14:28:42 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,25 @@ static int	wait_everything(int pid)
 	int	infos;
 	int	res;
 	int	return_value;
+	int	exited;
 
-	infos = -1;
 	return_value = -1;
 	res = 0;
+	exited = 0;
 	while (res != -1)
 	{
 		res = waitpid(0, &infos, 0);
+		if (!WIFEXITED(infos) && WIFSIGNALED(infos) && !exited)
+		{
+			exited = 1;
+			write(2, "\n", 1);
+		}
 		if (res == pid)
 		{
 			if (WIFEXITED(infos))
 				return_value = WEXITSTATUS(infos);
 			else if (WIFSIGNALED(infos))
-			{
 				return_value = WTERMSIG(infos) + 128;
-				write(2, "\n", 1);
-			}
 		}
 	}
 	return (return_value);
