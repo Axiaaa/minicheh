@@ -14,7 +14,12 @@
 
 int	startwithnbr(char *s)
 {
-	if (s[0] >= '0' && s[0] <= '9')
+	size_t i;
+
+	i = 0;
+	while (s[i] == '"' || s[i] == 39)
+		i++;
+	if (s[i] >= '0' && s[i] <= '9')
 		return (1);
 	return (0);
 }
