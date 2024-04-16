@@ -6,7 +6,7 @@
 /*   By: geymat <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 14:22:42 by geymat            #+#    #+#             */
-/*   Updated: 2024/03/24 21:32:43 by geymat           ###   ########.fr       */
+/*   Updated: 2024/04/16 14:45:18 by geymat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ int	replace_all_here_docs(char **line, t_env *env)
 				replace_inside(line, i + 2,
 					limiter_size(*line + 2 + i) + i + 2, name);
 			else
+			{
 				replace_inside(line, i + 2,
 					limiter_size((*line) + 2 + i) + i + 2, "E");
+				return (1);
+			}
 		}
 		i++;
 	}
